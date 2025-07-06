@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>राजस्थान सामान्य ज्ञान क्विज</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; }
+    h1 { text-align: center; color: #4CAF50; }
+    .question { margin-bottom: 20px; }
+    .options label { display: block; margin: 5px 0; }
+    .btn { background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-top: 20px; }
+    .btn:hover { background-color: #45a049; }
+    #result { margin-top: 30px; font-weight: bold; font-size: 18px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>राजस्थान सामान्य ज्ञान क्विज</h1>
+  <form id="quizForm">
+    <!-- Questions Will Be Injected Here -->
+  </form>
+  <div style="text-align:center">
+    <button class="btn" onclick="calculateResult()">परिणाम दिखाएं</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    const questions = [
+      { q: "चित्रकला की देवगढ़ शैली सम्बन्धित है –", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "आहू और कालीसिंध नदियों के संगम पर कौनसा किला बना हुआ है?", a: "A", o: ["A", "B", "C", "D"] },
+      { q: "निम्न में से कौनसे लोकदेवता जोधपुर के राव जोधा के समकालीन थे?", a: "B", o: ["A", "B", "C", "D"] },
+      { q: "निम्नलिखित में से किसे 59वाँ ज्ञानपीठ पुरस्कार दिया गया है?", a: "B", o: ["A", "B", "C", "D"] },
+      { q: "निम्न में से किस जिले में गोलेराव जैन मंदिर स्थित है?", a: "C", o: ["A", "B", "C", "D"] },
+      { q: "लांगुरिया नृत्य के लिए विशेष रूप से कौन सा क्षेत्र प्रसिद्ध है", a: "B", o: ["A", "B", "C", "D"] },
+      { q: "राजस्थान में शिवसागर बांध किस नदी पर बना है?", a: "B", o: ["A", "B", "C", "D"] },
+      { q: "जनवरी, 2025 में डोनाल्ड ट्रम्प ने शपथ ली-", a: "A", o: ["A", "B", "C", "D"] },
+      { q: "किस वर्ष में 'प्रोजेक्ट टाइगर' की शुरुआत हुई?", a: "C", o: ["A", "B", "C", "D"] },
+      { q: "हाल ही में किस दिन को संयुक्त राष्ट्र महासभा ने ‘विश्व ध्यान दिवस’ घोषित किया है?", a: "A", o: ["A", "B", "C", "D"] },
+      { q: "राजस्थान की प्रथम कार्यवाहक (अतिरिक्त प्रभार) महिला राज्यपाल थी?", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "राजस्थान में सर्वप्रथम स्वदेश का नारा किस के द्वारा उद्घोषित किया गया?", a: "C", o: ["A", "B", "C", "D"] },
+      { q: "मेवाड़ चीनी मिल की स्थापना  __________ में की गई थी-", a: "A", o: ["A", "B", "C", "D"] },
+      { q: "प्रथम विश्व युद्ध समाप्त होने पर जर्मनी से संधि वार्ता में भाग लेने के लिए भारत का प्रतिनिधित्व परिस में किसने किया ?", a: "A", o: ["A", "B", "C", "D"] },
+      { q: "1024 x 1024 x 1024 बाइट्स किसके बराबर है ?", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "एमएस-एक्सेस किस प्रकार का डेटाबेस है?", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "एक्टिव सेल में AutoFill (ऑटोफिल) हैंडल कहाँ स्थित होता है?", a: "A", o: ["A", "B", "C", "D"] },
+      { q: "टोंक जिले के मालपुरा तहसील में डिग्गी पुरी के राजा कल्याण जी किसके अवतार माने जाते हैं ?", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "राजस्थान राज्य विधानसभा में अविश्वास प्रस्ताव प्रस्तुत करने के लिए कितने सदस्यों का समर्थन आवश्यक है ?", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "किस बीमारी के उपचार में दवा के स्तर की निगरानी की जानी चाहिए?", a: "D", o: ["A", "B", "C", "D"] },
+      { q: "आयुष्मान भारत योजना की शुरुआत कब हुई थी?", a: "A", o: ["A", "B", "C", "D"] },
+    ];
+
+    const optionText = {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    };
+
+    const form = document.getElementById('quizForm');
+
+    questions.forEach((q, index) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.innerHTML = `<p><b>Q${index + 1}. ${q.q}</b></p>`;
+      const opts = q.o.map(opt => `<label><input type="radio" name="q${index}" value="${opt}"> ${optionText[opt]}</label>`).join('');
+      div.innerHTML += `<div class="options">${opts}</div>`;
+      form.appendChild(div);
+    });
+
+    function calculateResult() {
+      let score = 0;
+      questions.forEach((q, index) => {
+        const answer = document.querySelector(`input[name=q${index}]:checked`);
+        if (answer) {
+          if (answer.value === q.a) score += 1;
+          else score -= 1 / 3;
+        }
+      });
+      score = Math.max(0, score).toFixed(2);
+      document.getElementById('result').innerText = `आपका स्कोर: ${score} / ${questions.length}`;
+    }
+  </script>
+</body>
+</html>
