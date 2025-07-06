@@ -3,81 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>राजस्थान सामान्य ज्ञान क्विज</title>
+  <title>राजस्थान टेस्ट क्विज</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; }
-    h1 { text-align: center; color: #4CAF50; }
-    .question { margin-bottom: 20px; }
-    .options label { display: block; margin: 5px 0; }
-    .btn { background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-top: 20px; }
-    .btn:hover { background-color: #45a049; }
-    #result { margin-top: 30px; font-weight: bold; font-size: 18px; text-align: center; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .question {
+      background: #ffffff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .options label {
+      display: block;
+      margin: 5px 0;
+    }
+    #result {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h1>राजस्थान सामान्य ज्ञान क्विज</h1>
-  <form id="quizForm">
-    <!-- Questions Will Be Injected Here -->
-  </form>
-  <div style="text-align:center">
-    <button class="btn" onclick="calculateResult()">परिणाम दिखाएं</button>
+  <h1>राजस्थान टेस्ट क्विज</h1>
+  <form id="quizForm"></form>
+  <div style="text-align:center; margin-top:20px">
+    <button onclick="calculateScore()">परिणाम दिखाएँ</button>
   </div>
   <div id="result"></div>
 
   <script>
     const questions = [
-      { q: "चित्रकला की देवगढ़ शैली सम्बन्धित है –", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "आहू और कालीसिंध नदियों के संगम पर कौनसा किला बना हुआ है?", a: "A", o: ["A", "B", "C", "D"] },
-      { q: "निम्न में से कौनसे लोकदेवता जोधपुर के राव जोधा के समकालीन थे?", a: "B", o: ["A", "B", "C", "D"] },
-      { q: "निम्नलिखित में से किसे 59वाँ ज्ञानपीठ पुरस्कार दिया गया है?", a: "B", o: ["A", "B", "C", "D"] },
-      { q: "निम्न में से किस जिले में गोलेराव जैन मंदिर स्थित है?", a: "C", o: ["A", "B", "C", "D"] },
-      { q: "लांगुरिया नृत्य के लिए विशेष रूप से कौन सा क्षेत्र प्रसिद्ध है", a: "B", o: ["A", "B", "C", "D"] },
-      { q: "राजस्थान में शिवसागर बांध किस नदी पर बना है?", a: "B", o: ["A", "B", "C", "D"] },
-      { q: "जनवरी, 2025 में डोनाल्ड ट्रम्प ने शपथ ली-", a: "A", o: ["A", "B", "C", "D"] },
-      { q: "किस वर्ष में 'प्रोजेक्ट टाइगर' की शुरुआत हुई?", a: "C", o: ["A", "B", "C", "D"] },
-      { q: "हाल ही में किस दिन को संयुक्त राष्ट्र महासभा ने ‘विश्व ध्यान दिवस’ घोषित किया है?", a: "A", o: ["A", "B", "C", "D"] },
-      { q: "राजस्थान की प्रथम कार्यवाहक (अतिरिक्त प्रभार) महिला राज्यपाल थी?", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "राजस्थान में सर्वप्रथम स्वदेश का नारा किस के द्वारा उद्घोषित किया गया?", a: "C", o: ["A", "B", "C", "D"] },
-      { q: "मेवाड़ चीनी मिल की स्थापना  __________ में की गई थी-", a: "A", o: ["A", "B", "C", "D"] },
-      { q: "प्रथम विश्व युद्ध समाप्त होने पर जर्मनी से संधि वार्ता में भाग लेने के लिए भारत का प्रतिनिधित्व परिस में किसने किया ?", a: "A", o: ["A", "B", "C", "D"] },
-      { q: "1024 x 1024 x 1024 बाइट्स किसके बराबर है ?", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "एमएस-एक्सेस किस प्रकार का डेटाबेस है?", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "एक्टिव सेल में AutoFill (ऑटोफिल) हैंडल कहाँ स्थित होता है?", a: "A", o: ["A", "B", "C", "D"] },
-      { q: "टोंक जिले के मालपुरा तहसील में डिग्गी पुरी के राजा कल्याण जी किसके अवतार माने जाते हैं ?", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "राजस्थान राज्य विधानसभा में अविश्वास प्रस्ताव प्रस्तुत करने के लिए कितने सदस्यों का समर्थन आवश्यक है ?", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "किस बीमारी के उपचार में दवा के स्तर की निगरानी की जानी चाहिए?", a: "D", o: ["A", "B", "C", "D"] },
-      { q: "आयुष्मान भारत योजना की शुरुआत कब हुई थी?", a: "A", o: ["A", "B", "C", "D"] },
+      {q:"Q1. चित्रकला की देवगढ़ शैली सम्बन्धित है –", options:["A) मारवाड़", "B) हाड़ौती", "C) ढूंढाड़", "D) मेवाड़"], answer:"D"},
+      {q:"Q2. आहू और कालीसिंध नदियों के संगम पर कौनसा किला बना हुआ है?", options:["A) गागरोन", "B) शाहबाद", "C) तारागढ़", "D) शेरगढ़"], answer:"A"},
+      {q:"Q3. निम्न में से कौनसे लोकदेवता जोधपुर के राव जोधा के समकालीन थे?", options:["A) तेजाजी", "B) हड़बूजी", "C) कल्लाजी", "D) देवनारायण जी"], answer:"B"},
+      {q:"Q4. निम्नलिखित में से किसे 59वाँ ज्ञानपीठ पुरस्कार दिया गया है?", options:["A) गुलज़ार", "B) विनोद कुमार शुक्ल", "C) दामोदर मौउजो", "D) नीलमणि फूकन"], answer:"B"},
+      {q:"Q5. किस जिले में गोलेराव जैन मंदिर स्थित है?", options:["A) बीकानेर", "B) जोधपुर", "C) राजसमन्द", "D) बांसवाड़ा"], answer:"C"},
+      {q:"Q6. लांगुरिया नृत्य के लिए कौन सा क्षेत्र प्रसिद्ध है", options:["A) उदयपुर", "B) करौली", "C) बाड़मेर", "D) सीकर"], answer:"B"},
+      {q:"Q7. राजस्थान में शिवसागर बांध किस नदी पर बना है?", options:["A) गंभीरी", "B) मेज", "C) मानसी", "D) बनास"], answer:"B"},
+      {q:"Q8. जनवरी 2025 में डोनाल्ड ट्रम्प ने शपथ ली -", options:["A) 47वें राष्ट्रपति", "B) 44वें राष्ट्रपति", "C) 43वें राष्ट्रपति", "D) 41वें राष्ट्रपति"], answer:"A"},
+      {q:"Q9. 'प्रोजेक्ट टाइगर' की शुरुआत कब हुई?", options:["A) 1971", "B) 1972", "C) 1973", "D) 1975"], answer:"C"},
+      {q:"Q10. संयुक्त राष्ट्र महासभा ने ‘विश्व ध्यान दिवस’ किस दिन घोषित किया है?", options:["A) 21 दिसम्बर", "B) 3 दिसम्बर", "C) 1 दिसम्बर", "D) 25 दिसम्बर"], answer:"A"},
+      {q:"Q11. राजस्थान की प्रथम कार्यवाहक महिला राज्यपाल थी?", options:["A) मार्गरेट अल्वा", "B) निर्मला पांडे", "C) प्रतिभा पाटिल", "D) प्रभा राव"], answer:"D"},
+      {q:"Q12. सर्वप्रथम 'स्वदेश' का नारा किसने दिया?", options:["A) महात्मा गांधी", "B) सुभाष चंद्र बोस", "C) स्वामी दयानंद", "D) महाराणा सज्जन सिंह"], answer:"C"},
+      {q:"Q13. मेवाड़ चीनी मिल की स्थापना कहाँ की गई?", options:["A) भूपाल सागर", "B) ब्यावर", "C) किशनगढ़", "D) भीलवाड़ा"], answer:"A"},
+      {q:"Q14. WWI के बाद भारत का प्रतिनिधित्व किसने किया?", options:["A) महाराजा गंगा सिंह", "B) शार्दुल सिंह", "C) माधो सिंह", "D) फतेह सिंह"], answer:"A"},
+      {q:"Q15. 1024x1024x1024 बाइट्स किसके बराबर है?", options:["A) 1TB", "B) 1MB", "C) 1KB", "D) 1GB"], answer:"D"},
+      {q:"Q16. एमएस एक्सेस किस प्रकार का डेटाबेस है?", options:["A) नेटवर्क", "B) सर्वर", "C) वितरित", "D) डेस्कटॉप"], answer:"D"},
+      {q:"Q17. AutoFill हैंडल कहाँ होता है?", options:["A) नीचे दाएं कोने में", "B) ऊपर बाएं", "C) नीचे बाएं", "D) ऊपर दाएं"], answer:"A"},
+      {q:"Q18. डिग्गी पुरी के राजा कल्याण जी किसके अवतार हैं?", options:["A) शिव", "B) कृष्ण", "C) राम", "D) विष्णु"], answer:"D"},
+      {q:"Q19. विधानसभा में अविश्वास प्रस्ताव के लिए कितने सदस्य चाहिए?", options:["A) 1/12", "B) 1/3", "C) 1/5", "D) 1/10"], answer:"D"},
+      {q:"Q20. किस बीमारी में दवा स्तर निगरानी जरूरी है?", options:["A) मधुमेह", "B) अस्थमा", "C) रक्तचाप", "D) मिर्गी"], answer:"D"},
     ];
 
-    const optionText = {
-      A: "(A)",
-      B: "(B)",
-      C: "(C)",
-      D: "(D)"
-    };
-
-    const form = document.getElementById('quizForm');
-
+    const form = document.getElementById("quizForm");
     questions.forEach((q, index) => {
-      const div = document.createElement('div');
-      div.className = 'question';
-      div.innerHTML = `<p><b>Q${index + 1}. ${q.q}</b></p>`;
-      const opts = q.o.map(opt => `<label><input type="radio" name="q${index}" value="${opt}"> ${optionText[opt]}</label>`).join('');
-      div.innerHTML += `<div class="options">${opts}</div>`;
+      const div = document.createElement("div");
+      div.classList.add("question");
+      div.innerHTML = `<p>${q.q}</p>` +
+        q.options.map((opt, i) => `<label><input type="radio" name="q${index}" value="${opt[0]}"> ${opt}</label>`).join('');
       form.appendChild(div);
     });
 
-    function calculateResult() {
+    function calculateScore() {
       let score = 0;
-      questions.forEach((q, index) => {
-        const answer = document.querySelector(`input[name=q${index}]:checked`);
-        if (answer) {
-          if (answer.value === q.a) score += 1;
-          else score -= 1 / 3;
-        }
+      let total = questions.length;
+      const formData = new FormData(form);
+      questions.forEach((q, i) => {
+        const selected = formData.get(`q${i}`);
+        if (selected === q.answer) score += 1;
+        else if (selected) score -= 1/3;
       });
-      score = Math.max(0, score).toFixed(2);
-      document.getElementById('result').innerText = `आपका स्कोर: ${score} / ${questions.length}`;
+      document.getElementById("result").innerText = `आपका स्कोर: ${score.toFixed(2)} / ${total}`;
     }
   </script>
 </body>
